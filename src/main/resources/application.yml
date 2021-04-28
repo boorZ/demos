@@ -1,0 +1,6 @@
+server:
+  port: 8888
+logging:
+  level:
+    com.noask.taxwisdomhall.services.auth.generate.dao: DEBUG
+    org.springframework.data.mongodb.core: DEBUG
