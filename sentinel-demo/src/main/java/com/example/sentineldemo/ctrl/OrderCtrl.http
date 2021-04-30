@@ -10,7 +10,11 @@ GET http://127.0.0.1:8888/order/getOrder1?orderId=1
 Accept: application/json
 
 ###
-GET http://127.0.0.1:8888/order/getOrder2?orderId=001
+GET http://127.0.0.1:8888/order/getOrder2?orderId=000
+Accept: application/json
+
+###
+GET http://127.0.0.1:8888/goods/queryGoodsInfo?spuId=0
 Accept: application/json
 
 ###
