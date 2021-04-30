@@ -1,0 +1,16 @@
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+GET http://localhost:8888/order/getOrder?orderId=1
+Accept: application/json
+
+###
+GET http://127.0.0.1:8888/order/getOrder1?orderId=1
+Accept: application/json
+
+###
+GET http://127.0.0.1:8888/order/getOrder2?orderId=001
+Accept: application/json
+
+###
