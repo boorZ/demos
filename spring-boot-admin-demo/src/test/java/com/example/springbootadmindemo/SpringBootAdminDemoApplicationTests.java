@@ -1,10 +1,10 @@
-package com.example.springbootadminclient;
+package com.example.springbootadmindemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootAdminClientApplicationTests {
+class SpringBootAdminDemoApplicationTests {
 
     @Test
     void contextLoads() {
