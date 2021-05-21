@@ -1,0 +1,301 @@
+package drools;
+//generated from Decision Table
+import com.rules.pojo.RulePOJO
+import java.util.List;
+import org.springframework.util.StringUtils;
+import java.util.HashMap;
+import java.util.Map;
+global java.util.List list;
+// rule values at A9, header at A4
+rule "SuitMeFrom_9"
+	when
+		req:RulePOJO(mc contains "哈哈")
+	then
+		List<String> data = req.getData();
+		data.add("哈哈");
+		req.setData(data);
+end
+
+// rule values at A10, header at A4
+rule "SuitMeFrom_10"
+	when
+		req:RulePOJO(sz.equals("车船税"))
+        map:Map(get("sz").equals("车船税"));
+	then
+		List<String> data = req.getData();
+        data.add("A06110《车船税纳税申报表》");
+        req.setData(data);
+end
+//
+//// rule values at A11, header at A4
+//rule "SuitMeFrom_11"
+//	when
+//		req:RulePOJO(sz == "车船税")
+//	then
+//		list.add("A06553《车船税税源明细表（车辆）》");req.setData(list);
+//end
+//
+//// rule values at A12, header at A4
+//rule "SuitMeFrom_12"
+//	when
+//		req:RulePOJO(sz == "车船税")
+//	then
+//		list.add("A06555《车船税税源明细表（船舶）》");req.setData(list);
+//end
+//
+//// rule values at A13, header at A4
+//rule "SuitMeFrom_13"
+//	when
+//		req:RulePOJO(sz == "车船税")
+//	then
+//		list.add("A06134《车船税代收代缴报告表》");req.setData(list);
+//end
+//
+//// rule values at A14, header at A4
+//rule "SuitMeFrom_14"
+//	when
+//		req:RulePOJO(sz == "车辆购置税")
+//	then
+//		list.add("A06121《车辆购置税纳税申报表》（2019版）");req.setData(list);
+//end
+//
+//// rule values at A15, header at A4
+//rule "SuitMeFrom_15"
+//	when
+//		req:RulePOJO(qylx == "个体工商户")
+//	then
+//		list.add("A07108《个体工商户定额核定审批表》");req.setData(list);
+//end
+//
+//// rule values at A16, header at A4
+//rule "SuitMeFrom_16"
+//	when
+//		req:RulePOJO(sz == "企业所得税")
+//	then
+//		list.add("A06258《海上油气生产设施弃置费情况表》");req.setData(list);
+//end
+//
+//// rule values at A17, header at A4
+//rule "SuitMeFrom_17"
+//	when
+//		req:RulePOJO(zz == "小规模纳税人", hy =="水上运输业", sz == "增值税")
+//	then
+//		list.add("《货物运输业代开增值税专用发票缴纳税款申报单》");req.setData(list);
+//end
+//
+//// rule values at A18, header at A4
+//rule "SuitMeFrom_18"
+//	when
+//		req:RulePOJO(zz == "小规模纳税人", hy =="道路运输业", sz == "增值税")
+//	then
+//		list.add("《货物运输业代开增值税专用发票缴纳税款申报单》");req.setData(list);
+//end
+//
+//// rule values at A19, header at A4
+//rule "SuitMeFrom_19"
+//	when
+//		req:RulePOJO(yyfw == "生产汽油")
+//	then
+//		list.add("A06856《油价调控风险准备金申报表》");req.setData(list);
+//end
+//
+//// rule values at A20, header at A4
+//rule "SuitMeFrom_20"
+//	when
+//		req:RulePOJO(yyfw == "生产柴油")
+//	then
+//		list.add("A06856《油价调控风险准备金申报表》");req.setData(list);
+//end
+//
+//// rule values at A21, header at A4
+//rule "SuitMeFrom_21"
+//	when
+//		req:RulePOJO(yyfw == "委托加工汽油")
+//	then
+//		list.add("A06856《油价调控风险准备金申报表》");req.setData(list);
+//end
+//
+//// rule values at A22, header at A4
+//rule "SuitMeFrom_22"
+//	when
+//		req:RulePOJO(yyfw == "委托加工柴油")
+//	then
+//		list.add("A06856《油价调控风险准备金申报表》");req.setData(list);
+//end
+//
+//// rule values at A23, header at A4
+//rule "SuitMeFrom_23"
+//	when
+//		req:RulePOJO(yyfw == "进口汽油")
+//	then
+//		list.add("A06856《油价调控风险准备金申报表》");req.setData(list);
+//end
+//
+//// rule values at A24, header at A4
+//rule "SuitMeFrom_24"
+//	when
+//		req:RulePOJO(yyfw == "进口柴油")
+//	then
+//		list.add("A06856《油价调控风险准备金申报表》");req.setData(list);
+//end
+//
+//// rule values at A25, header at A4
+//rule "SuitMeFrom_25"
+//	when
+//		req:RulePOJO(sz == "消费税")
+//	then
+//		list.add("A06885《消费税纳税申报表》");req.setData(list);
+//end
+//
+//// rule values at A26, header at A4
+//rule "SuitMeFrom_26"
+//	when
+//		req:RulePOJO(hy =="精炼石油产品制造", sz == "消费税")
+//	then
+//		list.add("A06886《本期准予扣除税额计算表（成品油纳税人适用）》");req.setData(list);
+//end
+//
+//// rule values at A27, header at A4
+//rule "SuitMeFrom_27"
+//	when
+//		req:RulePOJO(sz == "消费税")
+//	then
+//		list.add("A06887《本期委托加工收回情况报告表》");req.setData(list);
+//end
+//
+//// rule values at A28, header at A4
+//rule "SuitMeFrom_28"
+//	when
+//		req:RulePOJO(sz == "车辆购置税")
+//	then
+//		list.add("A07035《车辆购置税退税申请表》（2019版）");req.setData(list);
+//end
+//
+//// rule values at A29, header at A4
+//rule "SuitMeFrom_29"
+//	when
+//		req:RulePOJO(mc contains "石油化工", yyfw == "乙烯")
+//	then
+//		list.add("A07086《用于生产乙烯、芳烃类化工产品的石脑油、燃料油消费税应退税额计算表》");req.setData(list);
+//end
+//
+//// rule values at A30, header at A4
+//rule "SuitMeFrom_30"
+//	when
+//		req:RulePOJO(mc contains "石油化工", yyfw == "芳烃")
+//	then
+//		list.add("A07086《用于生产乙烯、芳烃类化工产品的石脑油、燃料油消费税应退税额计算表》");req.setData(list);
+//end
+//
+//// rule values at A31, header at A4
+//rule "SuitMeFrom_31"
+//	when
+//		req:RulePOJO(yyfw == "乙烯")
+//	then
+//		list.add("A07086《用于生产乙烯、芳烃类化工产品的石脑油、燃料油消费税应退税额计算表》");req.setData(list);
+//end
+//
+//// rule values at A32, header at A4
+//rule "SuitMeFrom_32"
+//	when
+//		req:RulePOJO(yyfw == "芳烃")
+//	then
+//		list.add("A07086《用于生产乙烯、芳烃类化工产品的石脑油、燃料油消费税应退税额计算表》");req.setData(list);
+//end
+//
+//// rule values at A33, header at A4
+//rule "SuitMeFrom_33"
+//	when
+//		req:RulePOJO(mc contains "外贸", yyfw == "出口")
+//	then
+//		list.add("A08005《外贸企业出口退税进货明细申报表》");req.setData(list);
+//end
+//
+//// rule values at A34, header at A4
+//rule "SuitMeFrom_34"
+//	when
+//		req:RulePOJO(mc contains "外贸", yyfw == "进口")
+//	then
+//		list.add("A08005《外贸企业出口退税进货明细申报表》");req.setData(list);
+//end
+//
+//// rule values at A35, header at A4
+//rule "SuitMeFrom_35"
+//	when
+//		req:RulePOJO(mc contains "外贸", yyfw == "进出口")
+//	then
+//		list.add("A08005《外贸企业出口退税进货明细申报表》");req.setData(list);
+//end
+//
+//// rule values at A36, header at A4
+//rule "SuitMeFrom_36"
+//	when
+//		req:RulePOJO(mc contains "外贸", yyfw == "出口")
+//	then
+//		list.add("A08006《外贸企业出口退税出口明细申报表》");req.setData(list);
+//end
+//
+//// rule values at A37, header at A4
+//rule "SuitMeFrom_37"
+//	when
+//		req:RulePOJO(mc contains "外贸", yyfw == "进口")
+//	then
+//		list.add("A08006《外贸企业出口退税出口明细申报表》");req.setData(list);
+//end
+//
+//// rule values at A38, header at A4
+//rule "SuitMeFrom_38"
+//	when
+//		req:RulePOJO(mc contains "外贸", yyfw == "进出口")
+//	then
+//		list.add("A08006《外贸企业出口退税出口明细申报表》");req.setData(list);
+//end
+//
+//// rule values at A39, header at A4
+//rule "SuitMeFrom_39"
+//	when
+//		req:RulePOJO(mc contains "跨境", hy =="道路运输业", sz == "增值税")
+//	then
+//		list.add("A08008《增值税零税率应税服务（国际运输/港澳台运输）免抵退税申报明细表》");req.setData(list);
+//end
+//
+//// rule values at A40, header at A4
+//rule "SuitMeFrom_40"
+//	when
+//		req:RulePOJO(hy =="道路运输业", yyfw == "跨境", sz == "增值税")
+//	then
+//		list.add("A08008《增值税零税率应税服务（国际运输/港澳台运输）免抵退税申报明细表》");req.setData(list);
+//end
+//
+//// rule values at A41, header at A4
+//rule "SuitMeFrom_41"
+//	when
+//		req:RulePOJO(mc contains "跨境", hy =="水上运输业", sz == "增值税")
+//	then
+//		list.add("A08008《增值税零税率应税服务（国际运输/港澳台运输）免抵退税申报明细表》");req.setData(list);
+//end
+//
+//// rule values at A42, header at A4
+//rule "SuitMeFrom_42"
+//	when
+//		req:RulePOJO(hy =="水上运输业", yyfw == "跨境", sz == "增值税")
+//	then
+//		list.add("A08008《增值税零税率应税服务（国际运输/港澳台运输）免抵退税申报明细表》");req.setData(list);
+//end
+//
+//// rule values at A43, header at A4
+//rule "SuitMeFrom_43"
+//	when
+//		req:RulePOJO(mc contains "跨境", hy =="航空运输业", sz == "增值税")
+//	then
+//		list.add("A08008《增值税零税率应税服务（国际运输/港澳台运输）免抵退税申报明细表》");req.setData(list);
+//end
+//
+//// rule values at A44, header at A4
+//rule "SuitMeFrom_44"
+//	when
+//		req:RulePOJO(hy =="航空运输业", yyfw == "跨境", sz == "增值税")
+//	then
+//		list.add("A08008《增值税零税率应税服务（国际运输/港澳台运输）免抵退税申报明细表》");req.setData(list);
+//end
+
