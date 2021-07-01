@@ -1,0 +1,18 @@
+#logging:
+#  file:
+#    name: logs/app.log
+#  level:
+#    org.springframework.security: ERROR
+#    org.springframework: ERROR
+#    org.springframework.context: ERROR
+#    org.apache.http: ERROR
+#    jdk.event.security: ERROR
+#    com.noask: DEBUG
+#    root: INFO
+#logging:
+#  config: classpath:logback.xml
+#log4j:
+#  logger:
+#    org:
+#      elasticsearch: OFF
+#        client: OFF
