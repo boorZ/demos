@@ -2,6 +2,7 @@ package com.example.noaskqaes;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.noaskqaes.service.Search;
 import com.example.noaskqaes.utils.FileUtils;
 import com.example.noaskqaes.utils.RestTemplateUtils;
 import com.example.noaskqaes.vo.dto.QaDTO;
@@ -30,41 +31,42 @@ import java.util.stream.Collectors;
  * @date 2021/6/22 18:07
  */
 @Slf4j
-public class QaMain {
+public class QaMain extends QaData{
 
-    static List<JudgeRep> QA_LIST = new ArrayList<>();
-    static IQaService iQaService = new IQaService(QA_LIST);
-    static {
-//        iQaService.initQa();
+    {
+        initQa();
 //        iQaService.initQa1();
-        iQaService.initQa2();
+//        iQaService.initQa2();
 //        iQaService.initQa3();
     }
+
     @Test
     public void asdf() throws IOException {
-        String s = baseTest("哪些进项税额可以从销项税额中抵扣");
+        String s = baseTest("离婚办理房屋产权过户是否征收个人所得税", "77014221652492288");
         System.out.println(s);
     }
+
     @Test
     public void testConn() throws IOException {
 //        List<String> collect = QA_LIST.stream().map(m -> m.searchList).collect(Collectors.toList());
         List<String> list = new ArrayList<>();
         for (JudgeRep judgeRep : QA_LIST) {
+            String judgeId = judgeRep.judgeId;
             String searchList = judgeRep.searchList;
             String[] split = searchList.split(",");
             for (String s : split) {
-                String s1 = baseTest(s);
+                String s1 = baseTest(s, judgeId);
                 if (s1 == null) continue;
-                list.add(String.format("%s\t%s\t%s",s, judgeRep.judgeName, s1));
+                list.add(String.format("%s\t%s\t%s", s, judgeRep.judgeName, s1));
             }
         }
         System.out.println("====================================");
         System.out.println(StringUtils.join(list, "\n"));
     }
 
-    private static String baseTest(String searchValue) throws IOException {
+    private static String baseTest(String searchValue, String judgeId) throws IOException {
 //        Map<String, String> search = search(searchValue);
-        List<QaDTO> qas = ISearchService.newSearch(searchValue, 10);
+        List<QaDTO> qas = Search.newSearch(searchValue, 50);
         if (qas.size() < 3) {
             return null;
         }
@@ -72,13 +74,14 @@ public class QaMain {
         data.add(searchValue);
         List<String> docNames = qas.stream().map(QaDTO::getDocName).distinct().collect(Collectors.toList());
         data.addAll(docNames);
+        boolean contains = qas.stream().map(QaDTO::getDocId).collect(Collectors.toList()).contains(judgeId);
 
         Map<Object, Object> paramMap = new HashMap<>();
         paramMap.put("contents", data);
         String result = RestTemplateUtils.postForObject("http://10.8.0.9:50015/match", paramMap);
-
-        return String.format("%s\t%s", result.replaceAll("[{}\"|reank:]", ""), docNames);
+        return String.format("%s\t%s\t%s", result.replaceAll("[{}\"|reank:]", ""), docNames, contains);
     }
+
     @Test
     public void test() throws InterruptedException {
 //        List<String> list = new ArrayList<>();
@@ -99,6 +102,7 @@ public class QaMain {
     }
 
     protected static String GENERATE_PATH = "D:" + File.separator + "qa" + File.separator;
+
     /**
      * 生成文件
      *
@@ -110,7 +114,7 @@ public class QaMain {
         // 文件目录
         Path path = Paths.get(GENERATE_PATH + fileName);
         //追加写模式
-        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND)){
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
             writer.write(content);
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,6 +127,7 @@ public class QaMain {
         boolean b = matcher.find();
         return b ? matcher.group(0) : "";
     }
+
     private static List<String> regex(String regex, String text) {
         List<String> list = new ArrayList<>();
         Pattern p = Pattern.compile(regex);
@@ -133,12 +138,11 @@ public class QaMain {
         return list;
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
 //        String str = "", judgeId = "", judgeName = "";
 //        List<String> searchList;
-
         List<String> list = new ArrayList<>();
-        for (JudgeRep res : QA_LIST) {
+        for (JudgeRep res : super.QA_LIST) {
             String str = res.searchList;
             List<String> searchList = Arrays.asList(str.split(","));
             List<String> search = search(searchList, res.judgeId, res.judgeName);

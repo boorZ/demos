@@ -1,5 +1,6 @@
 package com.example.noaskqaes;
 
+import com.example.noaskqaes.service.Search;
 import com.example.noaskqaes.vo.dto.QaDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -19,9 +20,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @date 2021/6/25 17:18
  */
-public class Main {
-    static List<JudgeRep> QA_LIST = new ArrayList<>();
-    static IQaService iQaService = new IQaService(QA_LIST);
+public class Main extends QaData{
     static String searchValue =
 "社保交了咋个查";
 
@@ -42,24 +41,25 @@ public class Main {
 75748176735240192	个人住房出租如何征收印花税？	我出租住房印花税税务局怎么收的
 75747117786726400	申报环境保护税时需要提供什么资料？	我申报环保税需要交的资料有哪些
      */
-    static {
-        iQaService.initQa();
-        iQaService.initQa1();
-        iQaService.initQa2();
+    {
+        initQa();
+        initQa1();
+        initQa2();
     }
 
     @Test
     public void testSearch() throws IOException {
 //        ISearchService.dsl(searchValue, dsl -> dsl.size(3));
-        List<QaDTO> qas = ISearchService.newSearch(searchValue, 3);
+        List<QaDTO> qas = Search.newSearch(searchValue, 3);
         for (QaDTO qa : qas) {
             System.out.println(qa.getDocName());
         }
         System.out.println();
     }
     @Test
-    public void verify() {
-
+    public void verify() throws IOException {
+        List<QaDTO> 个人所得税 = Search.newSearch("个人所得税", 1);
+        System.out.println();
     }
 
     @Test
@@ -69,7 +69,6 @@ public class Main {
 
     @Test
     public void top() {
-        iQaService.initQa();
         List<String> list = new ArrayList<>();
         for (JudgeRep res : QA_LIST) {
             String str = res.searchList;
@@ -84,7 +83,7 @@ public class Main {
     public static List<String> search(List<String> searchList, String judgeId, String judgeName) {
         List<String> list = new ArrayList<>();
         for (String search : searchList) {
-            String s = ISearchService.searchList(search, judgeId, judgeName);
+            String s = Search.searchList(search, judgeId, judgeName);
             if (StringUtils.isNotEmpty(s)) {
                 list.add(s);
             }
@@ -120,7 +119,7 @@ public class Main {
         List<String> list = new ArrayList<>();
         Map<String, String> map = IFileService.readQa();
         for (String search : searchValueList) {
-            List<QaDTO> result = ISearchService.newSearch(search, 1);
+            List<QaDTO> result = Search.newSearch(search, 1);
             if (result.size() == 0) {
                 continue;
             }

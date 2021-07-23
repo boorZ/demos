@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -43,6 +44,17 @@ public class FileUtils {
     public static JSONArray readArray(String path) {
         String read = read(path);
         return JSON.parseArray(read);
+    }
+
+    public static void main(String[] args) {
+        String read = read("/datas/type");
+        String[] split = read.split("\n");
+        Map<String, String> map = new HashMap<>();
+        for (String s : split) {
+            String[] split1 = s.split(" ");
+            map.put(split1[0], split1[1]);
+        }
+        System.out.println();
     }
 
     /**
